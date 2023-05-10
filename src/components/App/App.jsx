@@ -5,6 +5,7 @@ import AuthorizationPage from "../AuthorizationPage/AuthorizationPage";
 import Main from "../Main/Main";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../api/auth";
+import Header from "../Header/Header";
 
 function App() {
     const handleRegister = (data) => {
@@ -26,6 +27,7 @@ function App() {
               path="/"
               element={
                   <ProtectedRoute>
+                      <Header />
                       <Main />
                   </ProtectedRoute>
               }

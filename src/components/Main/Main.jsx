@@ -1,5 +1,16 @@
+import './Main.css'
+import React from "react";
+import CardComponent from "../CardComponent/CardComponent";
+import {Swiper, SwiperSlide} from "swiper/react";
 const Main = () => {
-    return (<h1>Main</h1>)
+    return (
+        <section className={'main'}>
+            <CardComponent />
+            <CardComponent />
+            <CardComponent />
+            <CardComponent />
+        </section>
+    )
 }
 
 export default Main
