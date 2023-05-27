@@ -24,8 +24,6 @@ const RegistrationPage = ({onRegister}) => {
     const [show, setShow] = useState(false)
     const isDisabled = !(formData.fio && formData.email && formData.email.includes('@') && formData.phone && formData.password)
 
-    console.log(formData)
-
     const resetForm = useCallback(
         (
             newData = {

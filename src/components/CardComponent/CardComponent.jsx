@@ -17,7 +17,7 @@ const CardComponent = () => {
     >
         <Swiper
             // install Swiper modules
-            spaceBetween={50}
+            spaceBetween={250}
             slidesPerView={1}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             navigation
