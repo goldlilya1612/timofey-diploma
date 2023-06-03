@@ -1,24 +1,38 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import RegistrationPage from "../RegistrationPage/RegistrationPage";
 import AuthorizationPage from "../AuthorizationPage/AuthorizationPage";
 import Main from "../Main/Main";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import * as auth from "../../api/auth";
+import * as api from "../../api/api";
 import Header from "../Header/Header";
 
 function App() {
+    const navigate = useNavigate();
     const handleRegister = (data) => {
-        return auth
+        return api
             .register(data)
             .then(() => {
-                // dispatch(setIsLoading(true));
-                // handleLogin({ email, password }, setData, setErrors, resetForm);
+                const { email, password } = data;
+                handleLogin({username: email, password});
             })
             .catch((err) => {
-
+                console.log(err)
             });
     };
+
+
+    const handleLogin = (data) => {
+        return api
+            .login(data)
+            .then((res) => {
+                localStorage.setItem('token', res.access_token);
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
 
   return (
     <div className="App">
@@ -34,7 +48,7 @@ function App() {
           ></Route>
         <Route path='/signup' element={(<RegistrationPage onRegister={handleRegister}/>)}>
         </Route>
-        <Route path='/signin' element={(<AuthorizationPage />)}>
+        <Route path='/signin' element={(<AuthorizationPage onLogin={handleLogin}/>)}>
         </Route>
       </Routes>
     </div>

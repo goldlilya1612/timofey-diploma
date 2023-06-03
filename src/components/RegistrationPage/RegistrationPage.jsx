@@ -40,10 +40,10 @@ const RegistrationPage = ({onRegister}) => {
     );
     const handleShowClick = () => setShow(!show)
     const handleSubmit = (e) => {
-        const data = {...formData, phone: `+7${formData.phone}`}
+        const data = {...formData, phone: formData.phone}
         e.preventDefault();
         resetForm();
-        onRegister(data)
+        onRegister(data);
     }
 
     return (

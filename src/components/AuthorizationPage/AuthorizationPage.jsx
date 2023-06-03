@@ -13,17 +13,17 @@ import {
 } from "@chakra-ui/react";
 import {useState} from "react";
 
-const AuthorizationPage = () => {
+const AuthorizationPage = ({onLogin}) => {
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: '',
     });
     const [show, setShow] = useState(false)
-    const isDisabled = !(formData.email && formData.email.includes('@') && formData.password)
+    const isDisabled = !(formData.username && formData.username.includes('@') && formData.password)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('авторизация')
+        onLogin(formData);
     }
     const handleShowClick = () => setShow(!show)
 
@@ -35,9 +35,9 @@ const AuthorizationPage = () => {
                     <Box marginBottom={'30px'}>
                         <FormControl isRequired marginBottom={'10px'}>
                             <FormLabel>Email</FormLabel>
-                            <Input type='email' value={formData?.email} onChange={(e) => {setFormData({
+                            <Input type='email' value={formData?.username} onChange={(e) => {setFormData({
                                 ...formData,
-                                email: e.target.value,
+                                username: e.target.value,
                             })}}/>
                         </FormControl>
                         <FormControl isRequired marginBottom={'10px'}>
