@@ -27,6 +27,7 @@ function App() {
             .login(data)
             .then((res) => {
                 localStorage.setItem('token', res.access_token);
+                localStorage.setItem('userId', res.user_id);
                 navigate('/');
             })
             .catch((err) => {

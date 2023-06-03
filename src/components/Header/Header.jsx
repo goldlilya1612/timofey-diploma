@@ -13,6 +13,7 @@ const Header = () => {
             </Flex>
             <Button onClick={() => {
                 localStorage.removeItem('token');
+                localStorage.removeItem('userId');
                 navigate('/signin');
             }}>Выйти</Button>
         </header>

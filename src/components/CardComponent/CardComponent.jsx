@@ -5,12 +5,17 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import * as api from "../../api/api";
+import {useState} from "react";
 
-const CardComponent = ({card}) => {
-    console.log(card.id)
+const CardComponent = ({card, setIsSelected, isSelected}) => {
+    const userId = Number(localStorage.getItem('userId'));
+    const isCardSelected = card.buildings_used.includes(userId);
     const handleCardClick = () => {
+        // if (isCardSelected) return;
         api.createApplication(localStorage.getItem('token'), {building: card.id})
-            .then((res) => console.log(res))
+            .then(() => {
+                setIsSelected(!isSelected)
+            })
             .catch((err) => console.log(err))
     }
 
@@ -28,7 +33,7 @@ const CardComponent = ({card}) => {
             <CardBody style={{display: 'flex', justifyContent: 'space-between'}}>
                 <Flex w={'70%'} flexDirection={'column'}>
                     <Flex>
-                        <Text fontWeight={500}>Адрес:&ensp;</Text>
+                        <Text fontWeight={500}>Город:&ensp;</Text>
                         <Text>{card.address}</Text>
                     </Flex>
                     <Flex>
@@ -45,8 +50,8 @@ const CardComponent = ({card}) => {
                         <Text fontWeight={500}>Цена:&ensp;</Text>
                         <Text>от {card.price} &#8381;</Text>
                     </Flex>
-                    <Button variant='solid' colorScheme='blue' onClick={handleCardClick}>
-                        Оставить заявку
+                    <Button style={{backgroundColor: isCardSelected ? '#9c9c9c' : '#5b53ad'}} disabled={isCardSelected} variant='solid' colorScheme='blue' onClick={handleCardClick}>
+                        {isCardSelected ? 'Заявка оставлена' : 'Оставить заявку'}
                     </Button>
                 </Flex>
             </CardBody>
